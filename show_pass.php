@@ -3,7 +3,6 @@ $title = 'Password';
 
 session_start();
 $password = $_SESSION['password'];
-$is_repeat = $_SESSION['is_repeat'];
 ?>
 
 <!DOCTYPE html>
@@ -14,10 +13,10 @@ $is_repeat = $_SESSION['is_repeat'];
 <body class="bg-dark">
   <div class="d-flex justify-content-center  text-center mt-5 ">
     <div class="alert alert-info py-5 w-50">
-      <?php if (mb_strlen($password) > 0) : ?>
+      <?php if (mb_strlen($password) > 0 && !$_SESSION['is_invalid']) : ?>
         <p class="m-0">La tua password è: <strong><?= $password ?></strong></p>
       <?php else : ?>
-        <p class="m-0">Nessun campo corretto inserito...</p>
+        <div class="alert alert-danger p-5"><?= $_SESSION['error_message'] ?></div>
       <?php endif ?>
       <a href="index.php" class="mt-5 btn btn-warning">Genera una nuova password</a>
     </div>
