@@ -3,6 +3,7 @@ $title = 'Password';
 
 session_start();
 $password = $_SESSION['password'];
+$is_repeat = $_SESSION['is_repeat'];
 ?>
 
 <!DOCTYPE html>

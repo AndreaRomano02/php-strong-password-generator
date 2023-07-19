@@ -1,5 +1,5 @@
 <?php
-function get_password($pass_length, $types)
+function get_password($pass_length, $types, $is_repeat)
 {
   $full_characters_strings = '';
   $pass = '';
@@ -16,9 +16,18 @@ function get_password($pass_length, $types)
   }
   $full_characters_strings_length = mb_strlen($full_characters_strings) - 1; //* prendo la lunghezza della stringa di tutti i caratteri 
 
-  for ($i = 0; $i < $pass_length; $i++) { //* Lo faccio per quante volte mi viene indicato
-    $n = rand(0, $full_characters_strings_length); //* ottieni un carattere casuale dalla stringa con tutti i caratteri
-    $pass .= $full_characters_strings[$n]; //* aggiunge il carattere alla stringa della password
+  if (!$is_repeat) {
+    for ($i = 0; $i < $pass_length; $i++) { //* Lo faccio per quante volte mi viene indicato
+      $n = rand(0, $full_characters_strings_length); //* ottieni un carattere casuale dalla stringa con tutti i caratteri
+      $pass .= $full_characters_strings[$n]; //* aggiunge il carattere alla stringa della password
+    }
+  } else {
+    while (mb_strlen($pass) < $pass_length) {
+      do {
+        $n = rand(0, $full_characters_strings_length); //* ottieni un carattere casuale dalla stringa con tutti i caratteri
+      } while (str_contains($pass, $full_characters_strings[$n]));
+      $pass .= $full_characters_strings[$n];
+    }
   }
 
   return $pass; //* restituisce la password generata
