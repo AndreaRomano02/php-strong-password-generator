@@ -2,6 +2,12 @@
 $title = 'Random Password Generator';
 $is_invalid = false;
 
+//# Get checkbox
+$minus = $_GET['minus'] ?? false;
+$capital = $_GET['capital'] ?? false;;
+$number = $_GET['number'] ?? false;;
+$special = $_GET['special'] ?? false;;
+
 //# Repeat Character
 $is_repeat = $_GET['repeat-character'] ?? NULL;
 
@@ -14,15 +20,25 @@ if ($pass_length > 76) {
 }
 
 $password = '';
-$types = ['minus', 'capital', 'number', 'special'];
 
+//# TYPES
+$types = [];
+if (!$minus && !$capital && !$number && !$special)  $types = ['minus', 'capital', 'number', 'special'];
+if ($minus) $types[] = 'minus';
+if ($capital) $types[] = 'capital';
+if ($number) $types[] = 'number';
+if ($special) $types[] = 'special';
+
+//# functions
 require __DIR__ . '/includes/scripts/get_password.php';
 
+//# LOGIC
 session_start();
 $_SESSION['is_invalid'] = $is_invalid;
 $_SESSION['error_message'] = $error_message ?? '';
 if (!$is_invalid) $_SESSION['password'] = $password = get_password($pass_length, $types, $is_repeat);
 
+//# Redirectory
 if (!empty($password) || $is_invalid) header('Location: ./show_pass.php');
 ?>
 <!DOCTYPE html>
