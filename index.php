@@ -12,14 +12,16 @@ $special = $_GET['special'] ?? false;;
 $is_repeat = $_GET['repeat-character'] ?? NULL;
 
 //# Password
-$pass_length = $_GET['pass-length'] ?? 0;
+$pass_length = $_GET['pass-length'] ?? NULL;
+$password = '';
 
-if ($pass_length > 76) {
+//! Validation
+if ($pass_length > 76 || $pass_length < 0) {
   $is_invalid = true;
-  $error_message = 'Numeri caratteri troppo elevati (Inserisci meno di 76 caratteri)';
+  $error_message = 'Numeri caratteri troppo elevati (Inserisci un numero da 1 a 76)';
 }
 
-$password = '';
+
 
 //# TYPES
 $types = [];
