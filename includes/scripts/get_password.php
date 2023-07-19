@@ -14,7 +14,7 @@ function get_password($pass_length, $types)
   foreach ($types as $type) {
     $full_characters_strings .= $characters[$type]; //* costruiamo una stringa con tutti i caratteri
   }
-  $full_characters_strings_length = strlen($full_characters_strings) - 1; //* prendo la lunghezza della stringa di tutti i caratteri 
+  $full_characters_strings_length = mb_strlen($full_characters_strings) - 1; //* prendo la lunghezza della stringa di tutti i caratteri 
 
   for ($i = 0; $i < $pass_length; $i++) { //* Lo faccio per quante volte mi viene indicato
     $n = rand(0, $full_characters_strings_length); //* ottieni un carattere casuale dalla stringa con tutti i caratteri
