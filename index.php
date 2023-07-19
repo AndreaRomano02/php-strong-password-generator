@@ -1,32 +1,11 @@
 <?php
 $pass_length = $_GET['pass-length'] ?? 0;
 $password = '';
-function genera_password($pass_length, $types)
-{
-  $full_characters_strings = '';
-  $pass = '';
+$types = ['minus', 'capital', 'number', 'special'];
 
+include __DIR__ . '/includes/scripts/get_password.php';
 
-  //# Creiamo un array di simboli
-  $characters["minus"] = 'abcdefghijklmnopqrstuvwxyz';
-  $characters["capital"] = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-  $characters["number"] = '1234567890';
-  $characters["special"] = '!?~@#-_+<>[]{}';
-
-  foreach ($types as $type) {
-    $full_characters_strings .= $characters[$type]; //* costruiamo una stringa con tutti i caratteri
-  }
-  $full_characters_strings_length = strlen($full_characters_strings) - 1; //* prendo la lunghezza della stringa di tutti i caratteri 
-
-  for ($i = 0; $i < $pass_length; $i++) { //* Lo faccio per quante volte mi viene indicato
-    $n = rand(0, $full_characters_strings_length); //* ottieni un carattere casuale dalla stringa con tutti i caratteri
-    $pass .= $full_characters_strings[$n]; //* aggiunge il carattere alla stringa della password
-  }
-
-  return $pass; //* restituisce la password generata
-}
-
-$password = genera_password($pass_length, ['minus', 'capital', 'number', 'special']);
+$password = get_password($pass_length, $types);
 
 ?>
 <!DOCTYPE html>
@@ -58,11 +37,11 @@ $password = genera_password($pass_length, ['minus', 'capital', 'number', 'specia
           <input type="number" id="pass-length" name="pass-length" min="1">
         </div>
         <div class="button d-flex justify-content-between">
+          <a href="index.php" class="btn btn-danger mt-3">Cancella</a>
           <div>
             <button class="btn btn-primary mt-3">INVIA</button>
             <button type="reset" class="btn btn-secondary mt-3">ANNULLA</button>
           </div>
-          <a href="index.php" class="btn btn-danger mt-3">Cancella</a>
         </div>
       </form>
     </div>
