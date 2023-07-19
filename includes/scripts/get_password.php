@@ -16,6 +16,12 @@ function get_password($pass_length, $types, $is_repeat)
   }
   $full_characters_strings_length = mb_strlen($full_characters_strings) - 1; //* prendo la lunghezza della stringa di tutti i caratteri 
 
+  if ($is_repeat && $pass_length > $full_characters_strings_length) {
+    session_start();
+    $_SESSION['is_invalid'] = true;
+    return "Devi inserire come lunghezza della password tra 0 e $full_characters_strings_length";
+  }
+
   if (!$is_repeat) {
     for ($i = 0; $i < $pass_length; $i++) { //* Lo faccio per quante volte mi viene indicato
       $n = rand(0, $full_characters_strings_length); //* ottieni un carattere casuale dalla stringa con tutti i caratteri

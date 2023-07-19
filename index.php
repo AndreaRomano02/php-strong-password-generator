@@ -15,21 +15,21 @@ $is_repeat = $_GET['repeat-character'] ?? NULL;
 $pass_length = $_GET['pass-length'] ?? NULL;
 $password = '';
 
-//! Validation
-if ($pass_length > 76 || $pass_length < 0) {
-  $is_invalid = true;
-  $error_message = 'Numeri caratteri troppo elevati (Inserisci un numero da 1 a 76)';
-}
-
-
-
 //# TYPES
 $types = [];
-if (!$minus && !$capital && !$number && !$special)  $types = ['minus', 'capital', 'number', 'special'];
+if (!$minus && !$capital && !$number && !$special) {
+  $types = ['minus', 'capital', 'number', 'special'];
+  //! Validaizone
+  if ($is_repeat && $pass_length > 76 || $pass_length < 0) {
+    $is_invalid = true;
+    $error_message = 'Numeri caratteri troppo elevati o assenti (Inserisci un numero da 1 a 76)';
+  }
+}
 if ($minus) $types[] = 'minus';
 if ($capital) $types[] = 'capital';
 if ($number) $types[] = 'number';
 if ($special) $types[] = 'special';
+
 
 //# functions
 require __DIR__ . '/includes/scripts/get_password.php';
