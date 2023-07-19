@@ -22,12 +22,12 @@ function get_password($pass_length, $types, $is_repeat)
     return "Devi inserire come lunghezza della password tra 0 e $full_characters_strings_length";
   }
 
-  if (!$is_repeat) {
+  if (!$is_repeat) { //# Se si possono ripetere i caratteri
     for ($i = 0; $i < $pass_length; $i++) { //* Lo faccio per quante volte mi viene indicato
       $n = rand(0, $full_characters_strings_length); //* ottieni un carattere casuale dalla stringa con tutti i caratteri
       $pass .= $full_characters_strings[$n]; //* aggiunge il carattere alla stringa della password
     }
-  } else {
+  } else {  //# Se NON si possono ripetere i caratteri
     while (mb_strlen($pass) < $pass_length) {
       do {
         $n = rand(0, $full_characters_strings_length); //* ottieni un carattere casuale dalla stringa con tutti i caratteri

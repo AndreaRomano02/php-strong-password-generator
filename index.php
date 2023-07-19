@@ -4,9 +4,9 @@ $is_invalid = false;
 
 //# Get checkbox
 $minus = $_GET['minus'] ?? false;
-$capital = $_GET['capital'] ?? false;;
-$number = $_GET['number'] ?? false;;
-$special = $_GET['special'] ?? false;;
+$capital = $_GET['capital'] ?? false;
+$number = $_GET['number'] ?? false;
+$special = $_GET['special'] ?? false;
 
 //# Repeat Character
 $is_repeat = $_GET['repeat-character'] ?? NULL;
@@ -61,7 +61,7 @@ if (!empty($password) || $is_invalid) header('Location: ./show_pass.php');
           <input type="number" id="pass-length" name="pass-length" min="1">
         </div>
         <div class="p-0 mt-3 form-check form-switch d-flex justify-content-between">
-          <label for="check">Consenti di ripetere lo stesso carattere?</label>
+          <label for="check">Consenti di non ripetere lo stesso carattere?</label>
           <input class="form-check-input" name="repeat-character" type="checkbox" role="switch" id="check">
         </div>
         <div class="d-flex flex-column align-items-end">
